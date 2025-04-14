@@ -3,19 +3,26 @@ drug=[]
 for _ in range(m):
     a,b,c=map(int,input().split())
     drug.append(set([a,b,c]))
-c=0
-r=[]
+mc=float('inf')
 for i in range(2**n):
     used=set()
     for j in range(n):
         if i&(1<<j):
             used.add(j+1)
     for d in drug:
-        for i in range(n):
-            cused=used.copy()
-            can=cused.add(i)
-            if can&d==d:
-                break
+        if d&used==d:
+            break
     else:
-        r.append(used)
-print(r)
+        print('u',used)
+        for e in range(n):
+            if e not in used:
+                used.add(e+1)
+                for d in drug:
+                    print('c',used,d,used&d)
+                    if used&d!=d:
+                        break
+                else:
+                    mc=min(mc,len(used)-1)
+                    print(used)
+                used.discard(e)
+print(mc)
