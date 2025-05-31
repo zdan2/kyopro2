@@ -1,29 +1,30 @@
-from collections import deque
 n=int(input())
 a=list(map(int,input().split()))
 b=list(map(int,input().split()))
-q=deque()
-for i in range(n):
-    if a[i]!=b[i]:
-        q.append((i,a[i],b[i]))
 c=0
-while q:
-    pi,pa,pb=q.popleft()
-    ni,na,nb=q.popleft()
-    if pi+1==ni and pa==nb and pb==na:
-        c+=1
-    elif pi+1==ni and pa==nb and pb!=na:
-        c+=1
-        q.appendleft((ni,na,pb))
-    elif pi+1==ni and pb==na and pa!=nb:
-        c+=1
-        q.appendleft((ni,pa,nb))
-    else:
-        print('No')
-        exit()
-    if c==2:
-        break
-if len(q)==0 and c==2:
+if a==b:
+    print('Yes')
+    exit()
+h=False
+for i in range(n-1):
+    if a[i]!=b[i]:
+        if a[i+1]==b[i] and a[i]==b[i+1]:
+            a[i],a[i+1]=a[i+1],a[i]
+            c+=1
+        elif i+2<n:
+            if a[i+2]==b[i]:
+                a[i],a[i+1],a[i+2]=a[i+2],a[i],a[i+1]
+                c+=2
+            elif a[i]==b[i+2]:
+                a[i],a[i+1],a[i+2]=a[i+1],a[i+2],a[i]
+                c+=2
+    if a[i]==a[i+1]:
+        h=True
+    if i>1 and a[i-1]==a[i]:
+        h=True
+if a==b and c==2:
+    print('Yes')
+elif a==b and c==1 and h:
     print('Yes')
 else:
     print('No')
