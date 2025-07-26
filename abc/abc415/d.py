@@ -3,13 +3,12 @@ n,m=map(int,input().split())
 hq=[]
 for _ in range(m):
     a,b=map(int,input().split())
-    heapq.heappush(hq,(-b/a,a,b))
+    heapq.heappush(hq,(a-b,a,b))
 s=0
 while hq:
-    p,a,b=heapq.heappop(hq)
+    d,a,b=heapq.heappop(hq)
     if a<=n:
-        n-=a
-        n+=b
-        s+=1
-        heapq.heappush(hq,(p,a,b))
+        k=max(0, (n-a)//(a-b)+1)
+        n-=k*(a-b)
+        s+=k
 print(s)
