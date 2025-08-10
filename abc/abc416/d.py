@@ -5,7 +5,14 @@ for _ in range(t):
     b=list(map(int,input().split()))
     a.sort()
     b.sort(reverse=True)
-    sb=sorted(b)
-    c=sum((i+j)%m for i,j in zip(a,b))
-    cb=sum((i+j)%m for i,j in zip(a,sb))
-    print(min(c,cb))    
+    i=0
+    j=0
+    c=0
+    while i<n:
+        if b[j]>=m-a[i]:
+            c+=1
+            j+=1
+            i+=1
+        else:
+            i+=1
+    print(sum(a)+sum(b)-c*m) 
