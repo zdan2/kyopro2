@@ -1,0 +1,6 @@
+k=int(input())
+n=int(input())
+f=[1]*k+[k]
+while len(f)<n:
+    f.append((f[-1]*2-f[-k-1])%10000)
+print(f[n-1]%10000)

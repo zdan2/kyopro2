@@ -1,0 +1,5 @@
+n=int(input())
+a=sorted(list(map(int,input().split())))
+x=str(a[-1])
+y=str(a[-2])
+print(max(int(x+y),int(y+x)))
