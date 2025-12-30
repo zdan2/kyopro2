@@ -1,31 +1,28 @@
-from collections import deque
+from collections import deque,defaultdict
+
 n,m=map(int,input().split())
-qs=[]
-d={}
-for i in range(n):
+s=defaultdict()
+r=deque()
+for _ in range(m):
     k=int(input())
-    a=deque(list(map(int,input().split())))
-    c=a[0]
-    qs.append(a)
-    if c not in d:
-        d[c]=i
-        continue
-    while c in d:
-        qi=d[c]
-        del d[c]
-        qs[qi].popleft()
-        a.popleft()
-        if a:
-            nxtc=a[0]
+    a=list(map(int,input().split()))
+    dq=deque(a)
+    r.append(dq)
+
+while r:
+    x=r.popleft()
+    a=x[0]
+    while a in s:
+        s[a].popleft()
+        x.popleft()
+        if s[a]:
+            r.appendleft(s[a])
+        del s[a]
+        if x:
+            a=x[0]
         else:
-            nxtc=-1
-        if qs[qi]:
-            d[qs[qi][0]]=qi
-        if nxtc>0 and nxtc not in d:
-            d[nxtc]=i
             break
-        c=nxtc
-if not d:
-    print('Yes')
-else:
-    print('No')
+    if x:
+        s[x[0]]=x        
+
+print('No' if r or s else 'Yes')     

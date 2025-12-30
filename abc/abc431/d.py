@@ -1,16 +1,21 @@
-from collections import deque,defaultdict
 n=int(input())
-d=defaultdict(int)
-x=0
-hap=0
-r=[]
+tw=0
+p=[]
+ch=0
+cw=0
 for _ in range(n):
     w,h,b=map(int,input().split())
-    if b>=h:
-        x+=w
-        hap+=b
+    tw+=w
+    if h>=b:
+        p.append((w,h,b))
     else:
-        r.append([w,h,b])
-q=deque([0,x,hap])
-
-
+        ch+=b
+        cw+=w
+dp=[-1]*(tw//2+1)
+dp[0]=ch
+for w,h,b in p:
+    for i in range(tw//2,-1,-1):
+        if dp[i]>=0 and i+w<=tw//2:
+            dp[i+w]=max(dp[i+w],dp[i]+h)
+        dp[i]+=b
+print(max(dp))
