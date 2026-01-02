@@ -1,19 +1,20 @@
-from collections import defaultdict
-def node():
-    return defaultdict(node)
-
-n = int(input())
-trie = node()
-a=[]
+n=int(input())
+d={}
+word=[input() for _ in range(n)]
 for i in range(n):
-    s=list(input())
-    a.append(s)
-    cur=trie
-    for e in s:
-        cur=cur[e]
-    cur['#']=(i,len(s))
-for i,e in enumerate(a):
-    now=trie
-    c=0
-    for k in range(1,len(e)):
-        if cur in 
+    cd=d
+    for e in word[i]:
+        if e not in cd:
+            cd[e]={'co':0}
+        cd=cd[e]
+        cd['co']+=1
+    cd['*']=None
+for e in word:
+    cd=d
+    r=len(e)
+    for i,l in enumerate(e):
+        cd=cd[l]
+        if cd['co']==1:
+            r=i
+            break
+    print(r)
