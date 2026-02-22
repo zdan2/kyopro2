@@ -10,18 +10,25 @@ for e in p:
     d={}
     for i,l in enumerate(ss):
         d[l]=e[i]
-    n1=''
-    for e in s1:
-        n1+=str(d[e])
-    n2=''
-    for e in s2:
-        n2+=str(d[e])
-    n3=''
-    for e in s3:
-        n3+=str(d[e])
-    if n1[0]=='0' or n2[0]=='0' or n3[0]=='0':
+    n1=0
+    b=10*(len(s1)-1)
+    for i,e in enumerate(s1):
+        n1+=10**(b-i)*d[e]
+    if n1<b:
         continue
-    if int(n1)+int(n2)==int(n3):
+    n2=0
+    b=10*(len(s2)-1)
+    for i,e in enumerate(s2):
+        n2+=10**(b-i)*d[e]
+    if n2<b:
+        continue
+    n3=0
+    b=10*(len(s3)-1)
+    for i,e in enumerate(s3):
+        n3+=10**(b-i)*d[e]
+    if n3<b:
+        continue
+    if n1+n2==n3:
         print(n1)
         print(n2)
         print(n3)
