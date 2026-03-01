@@ -44,22 +44,14 @@ for k,l in q:
                     lcm[k].append(v)
                 elif v>lcm[k][0]:
                     lcm[k][0]=v
+    LCM=1
+    for k,v in lcm.items():
+        LCM=(LCM*pow(k,v[1],mod))%mod
     x=[]
-    for i in range(len(r)):
-        c=1
-        for k,v in lcm.items():
-            if k in r[i]:
-                if r[i][k]==v[1]:
-                    for _ in range(v[0]):
-                        c*=k
-                        c%=mod
-                else:
-                    for _ in range(v[1]):
-                        c*=k
-                        c%=mod
-            else:
-                for _ in range(v[1]):
-                    c*=k
-                    c%=mod
-        x.append(c)
+    for d in r:
+        a=LCM
+        for k,v in d.items():
+            if lcm[k][1]==v:
+                a=a*pow(pow(k,lcm[k][1]-lcm[k][0],mod),mod-2,mod)%mod
+        x.append(a)
     print(*x)
