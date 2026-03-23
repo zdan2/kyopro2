@@ -1,13 +1,14 @@
 n,q=map(int,input().split())
 c=list(map(int,input().split()))
-box=[{e} for e in c]
+s=[{e} for e in c]
 for _ in range(q):
     a,b=map(int,input().split())
-    if len(box[a-1])>len(box[b-1]):
-        box[a-1]|=box[b-1]
-        box[b-1]=box[a-1]
-        box[a-1]=set()
-    else:
-        box[b-1]|=box[a-1]
-        box[a-1]=set()
-    print(len(box[b-1]))
+    a-=1
+    b-=1
+    sa,sb=s[a],s[b]
+    if len(s[a])<len(s[b]):
+        sa,sb=sb,sa
+    sa|=sb
+    s[b]=sa
+    s[a]=set()
+    print(len(s[b]))
