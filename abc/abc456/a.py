@@ -1,0 +1,1 @@
+print(['No','Yes'][2<int(input())<19])

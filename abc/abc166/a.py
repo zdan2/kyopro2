@@ -1,0 +1,1 @@
+print('ARCABC'.replace(input(),''))
