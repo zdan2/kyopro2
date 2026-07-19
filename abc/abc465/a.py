@@ -1,0 +1,1 @@
+print(['No','Yes'][0<eval(input().replace(' ','*3-2*'))])

@@ -1,0 +1,6 @@
+x,y,l,r,a,b=map(int,input().split())
+c=max(l,a)
+d=min(r,b)
+e=max(0,d-c)
+f=max(0,b-a-e)
+print(x*e+f*y)
