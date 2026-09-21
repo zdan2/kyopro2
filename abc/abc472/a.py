@@ -1,0 +1,1 @@
+print(''.join([e if e=='A' else '.' for e in input()]))

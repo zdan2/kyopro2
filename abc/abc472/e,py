@@ -1,0 +1,50 @@
+from collections import deque,defaultdict
+def restore_cycle(u, v, parent):
+    path_u = []
+    position = {}
+    cur = u
+    while cur != -1:
+        position[cur] = len(path_u)
+        path_u.append(cur)
+        cur = parent[cur]
+    path_v = []
+    cur = v
+    while cur not in position:
+        path_v.append(cur)
+        cur = parent[cur]
+    lca = cur
+    cycle = path_u[:position[lca] + 1] + path_v[::-1]
+    return cycle
+t=int(input())
+for _ in range(t):
+    n,m=map(int,input().split())
+    d=defaultdict(set)
+    q=deque()
+    for _ in range(m):
+        a,b=map(int,input().split())
+        d[a].add(b)
+        d[b].add(a)
+    color=[-1]*(n+1)
+    color[1]=1
+    parent=[-1]*(n+1)
+    q=deque([1])
+    ce=None
+    while q:
+        v=q.popleft()
+        for nxt in d[v]:
+            if color[nxt]==-1:
+                color[nxt]=color[v]^1
+                parent[nxt]=v
+                q.append(nxt)
+            elif color[nxt]==color[v]:
+                ce=(v,nxt)
+        if ce is not None:
+            break
+    if ce is None:
+        print(-1)
+        continue
+    u,v=ce
+    cycle=restore_cycle(u,v,parent)
+    print(len(cycle))
+    print(*cycle)
+    
